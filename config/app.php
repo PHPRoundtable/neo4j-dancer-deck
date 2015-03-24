@@ -136,8 +136,6 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 
-		'Laravel\Socialite\SocialiteServiceProvider',
-
 		/*
 		 * Application Service Providers...
 		 */
@@ -146,6 +144,8 @@ return [
 		'Deck\Providers\ConfigServiceProvider',
 		'Deck\Providers\EventServiceProvider',
 		'Deck\Providers\RouteServiceProvider',
+
+		'SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider',
 
 	],
 
