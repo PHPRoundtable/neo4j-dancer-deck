@@ -9,11 +9,13 @@ class AuthController extends Controller
 {
     use AuthenticatesAndRegistersUsers;
 
+    protected $redirectTo = '/';
+
     /**
      * Create a new authentication controller instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Guard     $auth
-     * @param  \Illuminate\Contracts\Auth\Registrar $registrar
+     * @param  Guard     $auth
+     * @param  Registrar $registrar
      */
     public function __construct(Guard $auth, Registrar $registrar)
     {

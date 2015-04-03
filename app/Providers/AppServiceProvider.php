@@ -25,9 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind([
-          'Illuminate\Contracts\Auth\Registrar',
-          'DancerDeck\Services\Registrar',
-        ]);
+        $this->app->bind('Illuminate\Contracts\Auth\Registrar', 'DancerDeck\Services\Registrar');
     }
 }

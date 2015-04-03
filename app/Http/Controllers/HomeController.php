@@ -1,5 +1,7 @@
 <?php namespace DancerDeck\Http\Controllers;
 
+use Illuminate\View\View;
+
 class HomeController extends Controller
 {
     /**
@@ -7,16 +9,16 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('guest');
     }
 
     /**
      * Show the application dashboard to the user.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
-        return view('home');
+        return view('index');
     }
 }

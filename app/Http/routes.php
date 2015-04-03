@@ -1,8 +1,8 @@
 <?php
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'HomeController@index');
 
-Route::get('home', 'HomeController@index');
+Route::resource('event', 'EventController');
 
 Route::get('oauth2/facebook/login', 'Auth\OAuth2Controller@facebookAuthorize');
 Route::get('oauth2/facebook/callback', 'Auth\OAuth2Controller@facebookCallback');
