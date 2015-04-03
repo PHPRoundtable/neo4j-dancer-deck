@@ -44,12 +44,15 @@ class OAuth2Controller extends Controller
             }
 
             // User denied the request
+            dd($helper->getError());
+            /*
             dd(
               $helper->getError(),
               $helper->getErrorCode(),
               $helper->getErrorReason(),
               $helper->getErrorDescription()
             );
+            */
         }
 
         if (!$token->isLongLived()) {
