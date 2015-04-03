@@ -1,7 +1,6 @@
 <?php namespace DancerDeck\Events;
 
-abstract class Event {
-
-	//
-
+abstract class Event
+{
+    //
 }

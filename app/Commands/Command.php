@@ -1,7 +1,6 @@
 <?php namespace DancerDeck\Commands;
 
-abstract class Command {
-
-	//
-
+abstract class Command
+{
+    //
 }

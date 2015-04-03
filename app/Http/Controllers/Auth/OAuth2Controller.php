@@ -35,11 +35,11 @@ class OAuth2Controller extends Controller
 
         // Access token will be null if the user denied the request
         // or if someone just hit this URL outside of the OAuth flow.
-        if (! $token) {
+        if (!$token) {
             // Get the redirect helper
             $helper = $this->fb->getRedirectLoginHelper();
 
-            if (! $helper->getError()) {
+            if (!$helper->getError()) {
                 abort(403, 'Unauthorized action.');
             }
 
@@ -52,7 +52,7 @@ class OAuth2Controller extends Controller
             );
         }
 
-        if (! $token->isLongLived()) {
+        if (!$token->isLongLived()) {
             // OAuth 2.0 client handler
             $oauthClient = $this->fb->getOAuth2Client();
 
@@ -67,7 +67,7 @@ class OAuth2Controller extends Controller
         $this->fb->setDefaultAccessToken($token);
 
         // Save for later
-        Session::put('fb_user_access_token', (string) $token);
+        Session::put('fb_user_access_token', (string)$token);
 
         // Get basic info on the user from Facebook.
         try {

@@ -24,8 +24,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-      'auth' => 'DancerDeck\Http\Middleware\Authenticate',
+      'auth'       => 'DancerDeck\Http\Middleware\Authenticate',
       'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-      'guest' => 'DancerDeck\Http\Middleware\RedirectIfAuthenticated',
+      'guest'      => 'DancerDeck\Http\Middleware\RedirectIfAuthenticated',
     ];
 }
