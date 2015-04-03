@@ -1,4 +1,4 @@
-<?php namespace Deck\Providers;
+<?php namespace DancerDeck\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider {
 	 *
 	 * @var string
 	 */
-	protected $namespace = 'Deck\Http\Controllers';
+	protected $namespace = 'DancerDeck\Http\Controllers';
 
 	/**
 	 * Define your route model bindings, pattern filters, etc.

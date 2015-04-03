@@ -1,4 +1,4 @@
-<?php namespace Deck\Events;
+<?php namespace DancerDeck\Events;
 
 abstract class Event {
 

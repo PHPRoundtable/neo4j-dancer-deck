@@ -1,4 +1,4 @@
-<?php namespace Deck\Providers;
+<?php namespace DancerDeck\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

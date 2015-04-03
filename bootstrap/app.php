@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
 	'Illuminate\Contracts\Http\Kernel',
-	'Deck\Http\Kernel'
+	'DancerDeck\Http\Kernel'
 );
 
 $app->singleton(
 	'Illuminate\Contracts\Console\Kernel',
-	'Deck\Console\Kernel'
+	'DancerDeck\Console\Kernel'
 );
 
 $app->singleton(
 	'Illuminate\Contracts\Debug\ExceptionHandler',
-	'Deck\Exceptions\Handler'
+	'DancerDeck\Exceptions\Handler'
 );
 
 /*

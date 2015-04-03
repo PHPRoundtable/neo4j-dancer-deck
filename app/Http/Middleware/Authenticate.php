@@ -1,4 +1,4 @@
-<?php namespace Deck\Http\Middleware;
+<?php namespace DancerDeck\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

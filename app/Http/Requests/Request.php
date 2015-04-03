@@ -1,4 +1,4 @@
-<?php namespace Deck\Http\Requests;
+<?php namespace DancerDeck\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

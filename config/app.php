@@ -139,11 +139,11 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'Deck\Providers\AppServiceProvider',
-		'Deck\Providers\BusServiceProvider',
-		'Deck\Providers\ConfigServiceProvider',
-		'Deck\Providers\EventServiceProvider',
-		'Deck\Providers\RouteServiceProvider',
+		'DancerDeck\Providers\AppServiceProvider',
+		'DancerDeck\Providers\BusServiceProvider',
+		'DancerDeck\Providers\ConfigServiceProvider',
+		'DancerDeck\Providers\EventServiceProvider',
+		'DancerDeck\Providers\RouteServiceProvider',
 
 		'SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider',
 

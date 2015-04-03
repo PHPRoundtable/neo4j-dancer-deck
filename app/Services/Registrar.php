@@ -1,6 +1,6 @@
-<?php namespace Deck\Services;
+<?php namespace DancerDeck\Services;
 
-use Deck\User;
+use DancerDeck\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 

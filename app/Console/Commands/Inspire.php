@@ -1,4 +1,4 @@
-<?php namespace Deck\Console\Commands;
+<?php namespace DancerDeck\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

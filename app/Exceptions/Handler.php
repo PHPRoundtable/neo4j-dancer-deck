@@ -1,4 +1,4 @@
-<?php namespace Deck\Exceptions;
+<?php namespace DancerDeck\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

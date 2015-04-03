@@ -1,6 +1,6 @@
-<?php namespace Deck\Http\Controllers\Auth;
+<?php namespace DancerDeck\Http\Controllers\Auth;
 
-use Deck\Http\Controllers\Controller;
+use DancerDeck\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;

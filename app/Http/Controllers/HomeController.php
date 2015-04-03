@@ -1,4 +1,4 @@
-<?php namespace Deck\Http\Controllers;
+<?php namespace DancerDeck\Http\Controllers;
 
 class HomeController extends Controller
 {

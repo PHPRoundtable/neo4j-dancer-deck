@@ -1,4 +1,4 @@
-<?php namespace Deck\Http\Controllers;
+<?php namespace DancerDeck\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;

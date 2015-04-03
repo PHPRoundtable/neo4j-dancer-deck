@@ -1,4 +1,4 @@
-<?php namespace Deck\Providers;
+<?php namespace DancerDeck\Providers;
 
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +16,7 @@ class BusServiceProvider extends ServiceProvider {
 		$dispatcher->mapUsing(function($command)
 		{
 			return Dispatcher::simpleMapping(
-				$command, 'Deck\Commands', 'Deck\Handlers\Commands'
+				$command, 'DancerDeck\Commands', 'DancerDeck\Handlers\Commands'
 			);
 		});
 	}

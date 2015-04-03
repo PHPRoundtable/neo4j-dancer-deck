@@ -1,4 +1,4 @@
-<?php namespace Deck;
+<?php namespace DancerDeck;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

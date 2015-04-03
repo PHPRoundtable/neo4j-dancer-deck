@@ -1,4 +1,4 @@
-<?php namespace Deck\Providers;
+<?php namespace DancerDeck\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
 			'Illuminate\Contracts\Auth\Registrar',
-			'Deck\Services\Registrar'
+			'DancerDeck\Services\Registrar'
 		);
 	}
 

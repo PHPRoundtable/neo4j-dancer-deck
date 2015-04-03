@@ -1,4 +1,4 @@
-<?php namespace Deck\Commands;
+<?php namespace DancerDeck\Commands;
 
 abstract class Command {
 

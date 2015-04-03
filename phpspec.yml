@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: Deck
-        psr4_prefix: Deck
+        namespace: DancerDeck
+        psr4_prefix: DancerDeck
         src_path: app

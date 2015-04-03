@@ -1,7 +1,7 @@
-<?php namespace Deck\Http\Controllers\Auth;
+<?php namespace DancerDeck\Http\Controllers\Auth;
 
-use Deck\User;
-use Deck\Http\Controllers\Controller;
+use DancerDeck\User;
+use DancerDeck\Http\Controllers\Controller;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 use Facebook\Exceptions\FacebookSDKException;
 
