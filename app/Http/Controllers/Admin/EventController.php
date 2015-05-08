@@ -1,12 +1,13 @@
-<?php namespace DancerDeck\Http\Controllers;
+<?php namespace DancerDeck\Http\Controllers\Admin;
 
 use DancerDeck\Http\Requests;
-use DancerDeck\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
+use Facebook\Exceptions\FacebookSDKException;
 
-class EventController extends Controller
+class EventController extends AbstractController
 {
     /**
      * Create a new controller instance.
@@ -14,6 +15,8 @@ class EventController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        parent::__construct();
     }
 
     /**
@@ -23,7 +26,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('event-index');
+        return view('admin/event-index');
     }
 
     /**
@@ -34,6 +37,30 @@ class EventController extends Controller
     public function create()
     {
         dd(__FUNCTION__);
+    }
+
+    /**
+     * Import a new event from Facebook.
+     *
+     * @param LaravelFacebookSdk $fb
+     *
+     * @return Response
+     */
+    public function import(LaravelFacebookSdk $fb)
+    {
+        $token = \Session::get('fb_user_access_token');
+        $fb->setDefaultAccessToken($token);
+
+        $eventId = '848252565231486';
+        try {
+            $response = $fb->get('/'.$eventId.'?fields=id,name,description,start_time,end_time,picture.type(large){url},owner,parent_group,place,ticket_uri,timezone,updated_time');
+        } catch (FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+
+        $node = $response->getGraphObject();
+
+        dd($node);
     }
 
     /**

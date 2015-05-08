@@ -70,11 +70,13 @@ class OAuth2Controller extends Controller
         $this->fb->setDefaultAccessToken($token);
 
         // Save for later
-        Session::put('fb_user_access_token', (string)$token);
+        \Session::put('fb_user_access_token', (string)$token);
+
+        // @todo Check permissions to make sure we have access to their email address (required)
 
         // Get basic info on the user from Facebook.
         try {
-            $response = $this->fb->get('/me?fields=id,name,email');
+            $response = $this->fb->get('/me?fields=id,first_name,last_name,name,email,locale');
         } catch (FacebookSDKException $e) {
             dd($e->getMessage());
         }
@@ -87,7 +89,7 @@ class OAuth2Controller extends Controller
         $user = User::createOrUpdateGraphNode($facebookUser);
 
         // Log the user into Laravel
-        Auth::login($user);
+        \Auth::login($user);
 
         return redirect('/')->with('message', 'Successfully logged in with Facebook');
     }
