@@ -1,10 +1,10 @@
 <?php namespace DancerDeck\Http\Controllers\Admin;
 
+use DancerDeck\Facebook\FacebookService;
 use DancerDeck\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
-use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 use Facebook\Exceptions\FacebookSDKException;
 
 class EventController extends AbstractController
@@ -42,25 +42,21 @@ class EventController extends AbstractController
     /**
      * Import a new event from Facebook.
      *
-     * @param LaravelFacebookSdk $fb
+     * @param FacebookService $fbs
      *
      * @return Response
      */
-    public function import(LaravelFacebookSdk $fb)
+    public function import(FacebookService $fbs)
     {
-        $token = \Session::get('fb_user_access_token');
-        $fb->setDefaultAccessToken($token);
-
         $eventId = '848252565231486';
+
         try {
-            $response = $fb->get('/'.$eventId.'?fields=id,name,description,start_time,end_time,picture.type(large){url},owner,parent_group,place,ticket_uri,timezone,updated_time');
+            $eventNode = $fbs->getEvent($eventId);
         } catch (FacebookSDKException $e) {
             dd($e->getMessage());
         }
 
-        $node = $response->getGraphObject();
-
-        dd($node);
+        dd($eventNode);
     }
 
     /**

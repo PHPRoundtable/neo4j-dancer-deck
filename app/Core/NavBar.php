@@ -1,5 +1,7 @@
 <?php namespace DancerDeck\Core;
 
+use Illuminate\Support\Str;
+
 class NavBar
 {
     /**
@@ -39,10 +41,10 @@ class NavBar
             $checkParentUrl = isset($checkParentUrl) ? $checkParentUrl : $this->checkParentUrl;
 
             if ($checkParentUrl) {
-                $parentIsActive = \Str::is($parentUrl . '*', $currentUrl);
+                $parentIsActive = Str::is($parentUrl . '*', $currentUrl);
             }
 
-            $isActive = \Str::is($url, $currentUrl) || $parentIsActive;
+            $isActive = Str::is($url, $currentUrl) || $parentIsActive;
         }
 
         $this->nav[] = [

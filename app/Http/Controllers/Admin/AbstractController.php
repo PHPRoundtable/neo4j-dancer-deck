@@ -5,7 +5,7 @@ use DancerDeck\Services\View\JavascriptManager;
 use DancerDeck\Core\NavBar;
 use DancerDeck\Core\EloquentRepository;
 use Illuminate\Support\Collection;
-use Illuminate\View\View;
+use Illuminate\Contracts\View\Factory as ViewFactory;
 
 abstract class AbstractController extends Controller
 {
@@ -20,7 +20,7 @@ abstract class AbstractController extends Controller
     protected $globalViewVars;
 
     /**
-     * @var View
+     * @var ViewFactory
      */
     protected $view;
 
@@ -48,14 +48,12 @@ abstract class AbstractController extends Controller
         $this->breadcrumbNav = new NavBar();
         $this->view = view();
 
-        dd($this->view);
-
         // Share with the world!
-        $this->view->with('js', $this->js);
-        $this->view->with('globalViewVars', $this->globalViewVars);
-        $this->view->with('mainNav', $this->mainNav);
-        $this->view->with('subNav', $this->subNav);
-        $this->view->with('breadcrumbNav', $this->breadcrumbNav);
+        $this->view->share('js', $this->js);
+        $this->view->share('globalViewVars', $this->globalViewVars);
+        $this->view->share('mainNav', $this->mainNav);
+        $this->view->share('subNav', $this->subNav);
+        $this->view->share('breadcrumbNav', $this->breadcrumbNav);
 
         $this->setDefaultGlobalVars();
         $this->setDefaultJavascript();
@@ -69,7 +67,7 @@ abstract class AbstractController extends Controller
 
     protected function setOpenGraphTags($title, $description, $url = null)
     {
-        $this->view->with('meta', [
+        $this->view->share('meta', [
             'og:title' => $title,
             'og:description' => $description,
             'og:url' => $url ?: \Request::url(),
@@ -84,9 +82,9 @@ abstract class AbstractController extends Controller
         $this->globalViewVars->title = 'Dancer Deck';
         //$this->globalViewVars->isMobile = \Agent::isMobile();
         $this->globalViewVars->metaData = [];
-        $this->view->with('links', [
-          'home' => route('home'),
-          'logout' => route('logout'),
+        $this->view->share('links', [
+          'home' => url('/'),
+          'logout' => url('auth/logout'),
           'event_index' => route('admin.event.index'),
           'event_create' => route('admin.event.create'),
         ]);
