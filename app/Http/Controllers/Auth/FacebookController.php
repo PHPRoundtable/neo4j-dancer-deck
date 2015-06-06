@@ -1,11 +1,11 @@
 <?php namespace DancerDeck\Http\Controllers\Auth;
 
-use DancerDeck\User;
 use DancerDeck\Http\Controllers\Controller;
+use DancerDeck\Facebook\FacebookUserNodeImporter;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 use Facebook\Exceptions\FacebookSDKException;
 
-class OAuth2Controller extends Controller
+class FacebookController extends Controller
 {
     /**
      * @var LaravelFacebookSdk
@@ -17,14 +17,14 @@ class OAuth2Controller extends Controller
         $this->fb = $fb;
     }
 
-    public function facebookAuthorize()
+    public function authorize()
     {
         $loginUrl = $this->fb->getLoginUrl(['email']);
 
         return redirect($loginUrl);
     }
 
-    public function facebookCallback()
+    public function callback(FacebookUserNodeImporter $facebookNodeManager)
     {
         // Obtain an access token.
         try {
@@ -84,9 +84,11 @@ class OAuth2Controller extends Controller
         // Convert the response to a `Facebook/GraphNodes/GraphUser` collection
         $facebookUser = $response->getGraphUser();
 
-        // Create the user if it does not exist or update the existing entry.
-        // This will only work if you've added the SyncableGraphNodeTrait to your User model.
-        $user = User::createOrUpdateGraphNode($facebookUser);
+        if (!$foundUser = $facebookNodeManager->findNode($facebookUser)) {
+            $user = $facebookNodeManager->createNode($facebookUser);
+        } else {
+            $user = $facebookNodeManager->updateNode($foundUser, $facebookUser);
+        }
 
         // Log the user into Laravel
         \Auth::login($user);

@@ -39,5 +39,5 @@ return [
      * The default endpoint that Facebook will redirect to after
      * an authentication attempt.
      */
-    'default_redirect_uri' => '/oauth2/facebook/callback',
+    'default_redirect_uri' => '/facebook/callback',
     ];

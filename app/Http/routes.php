@@ -2,8 +2,8 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('oauth2/facebook/login', 'Auth\OAuth2Controller@facebookAuthorize');
-Route::get('oauth2/facebook/callback', 'Auth\OAuth2Controller@facebookCallback');
+Route::get('facebook/login', 'Auth\FacebookController@authorize');
+Route::get('facebook/callback', 'Auth\FacebookController@callback');
 
 Route::controllers([
   'auth'     => 'Auth\AuthController',
