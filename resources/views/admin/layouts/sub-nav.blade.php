@@ -5,7 +5,7 @@
                 @if ($navItem['url'])
                 <a href="{{ $navItem['url'] }}">
                 @endif
-                {{ $navItem['icon'] ? '<i class="fa ' . $navItem['icon'] . '"></i>' : '' }}
+                {!! $navItem['icon'] ? '<i class="fa ' . $navItem['icon'] . '"></i>' : '' !!}
                 {{ $navItem['anchor'] }}
                 @if ($navItem['url'])
                     </a>

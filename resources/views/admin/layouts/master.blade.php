@@ -17,7 +17,7 @@
                 @foreach ($mainNav->getNavItems() as $navItem)
                 <li class="{{ $navItem['isActive'] ? 'active' : '' }}">
                     <a href="{{ $navItem['url'] }}">
-                        {{ $navItem['icon'] ? '<i class="fa ' . $navItem['icon'] . '"></i>' : '' }}
+                        {!! $navItem['icon'] ? '<i class="fa ' . $navItem['icon'] . '"></i>' : '' !!}
                         {{ $navItem['anchor'] }}
                     </a>
                 </li>
