@@ -11,7 +11,8 @@
     "sammyk/facebook-query-builder": "~2.0",
     "facebook/php-sdk-v4": "~5.0@dev",
     "neoxygen/neoclient": "~2.1",
-    "ramsey/uuid": "~2.8"
+    "ramsey/uuid": "~2.8",
+    "fzaninotto/faker": "^1.5"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",

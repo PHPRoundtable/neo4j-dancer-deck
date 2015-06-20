@@ -24,6 +24,9 @@ class User extends BaseNode implements AuthenticatableContract, CanResetPassword
       'locale',
       'facebook_id',
       'remember_token',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     ];
 
     /**

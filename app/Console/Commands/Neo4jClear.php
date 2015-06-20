@@ -38,6 +38,11 @@ class Neo4jClear extends Command
      */
     public function fire(Client $client)
     {
+        if (env('APP_ENV') !== 'local') {
+            $this->error('Whoa! Only clear the db on local.');
+            return;
+        }
+
         $challengeData = mt_rand(1000,9999);
 
         $this->error('Whoa! This will delete the whole frigging database!');

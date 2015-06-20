@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
       'DancerDeck\Console\Commands\Inspire',
-      //'DancerDeck\Console\Commands\Neo4jClear',
+      'DancerDeck\Console\Commands\Neo4jClear',
+      'DancerDeck\Console\Commands\Neo4jSeed',
     ];
 
     /**
