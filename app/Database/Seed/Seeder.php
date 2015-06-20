@@ -32,8 +32,9 @@ class Seeder
     public function seed()
     {
         $userDisplayInfo = $this->seedUserData();
+        $eventSeriesDisplayInfo = $this->seedEventSeries();
 
-        return $userDisplayInfo;
+        return array_merge($userDisplayInfo, $eventSeriesDisplayInfo);
     }
 
     /**
@@ -50,10 +51,32 @@ class Seeder
           '<comment>Seeding User nodes...</comment>',
         ];
         foreach ($users as $entity) {
-
             $node = $this->repo->createNode($entity['node']);
 
             $displayInfo[] = 'Created user <info>'.$node->get('email').'</info> with password <comment>'.$entity['metadata']['password'].'</comment> and ID <comment>'.$node->get('id').'</comment>';
+        }
+
+        return $displayInfo;
+    }
+
+    /**
+     * Seeds the database with event series data
+     *
+     * @return array
+     */
+    private function seedEventSeries()
+    {
+        $eventSeriesFactory = new EventSeriesFactory;
+        $nodes = $eventSeriesFactory->generateNodes(10);
+
+        $displayInfo = [
+          '', // New line
+          '<comment>Seeding Event Series nodes...</comment>',
+        ];
+        foreach ($nodes as $node) {
+            $node = $this->repo->createNode($node);
+
+            $displayInfo[] = 'Created event series <info>'.$node->get('name').'</info>';
         }
 
         return $displayInfo;
