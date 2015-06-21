@@ -35,7 +35,7 @@ class UserFactory
         for ($x=0; $x<$numberOfNodes; $x++) {
             $firstName = $faker->firstName;
             $lastName = $faker->lastName;
-            $password = $faker->password;
+            $password = implode('-', $faker->words);
 
             $user = new User([
               'name' => $firstName.' '.$lastName,
