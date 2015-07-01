@@ -15,6 +15,21 @@ class Seeder
     private $userFactory;
 
     /**
+     * @var array
+     */
+    private $userNodes;
+
+    /**
+     * @var array
+     */
+    private $eventSeriesNodes;
+
+    /**
+     * @var array
+     */
+    private $eventNodes;
+
+    /**
      * @param Repository $repo
      * @param UserFactory $userFactory
      */
@@ -44,14 +59,16 @@ class Seeder
      */
     private function seedUserData()
     {
-        $users = $this->userFactory->generateNodes(10);
+        $nodes = $this->userFactory->generateNodes(10);
 
         $displayInfo = [
           '', // New line
           '<comment>Seeding User nodes...</comment>',
         ];
-        foreach ($users as $entity) {
+        foreach ($nodes as $entity) {
             $node = $this->repo->createNode($entity['node']);
+
+            $this->userNodes[] = $node;
 
             $displayInfo[] = 'Created user <info>'.$node->get('email').'</info> with password <comment>'.$entity['metadata']['password'].'</comment> and ID <comment>'.$node->get('id').'</comment>';
         }
@@ -67,16 +84,29 @@ class Seeder
     private function seedEventSeries()
     {
         $eventSeriesFactory = new EventSeriesFactory;
+        $eventFactory = new EventFactory;
         $nodes = $eventSeriesFactory->generateNodes(10);
 
         $displayInfo = [
           '', // New line
           '<comment>Seeding Event Series nodes...</comment>',
         ];
-        foreach ($nodes as $node) {
-            $node = $this->repo->createNode($node);
+        foreach ($nodes as $eventSeriesNode) {
+            $eventSeriesNode = $this->repo->createNode($eventSeriesNode);
+            $this->eventSeriesNodes[] = $eventSeriesNode;
 
-            $displayInfo[] = 'Created event series <info>'.$node->get('name').'</info>';
+            $displayInfo[] = 'Created event series <info>'.$eventSeriesNode->get('name').'</info>';
+
+            $eventNodes = $eventFactory->generateEvents($eventSeriesNode);
+
+            foreach ($eventNodes as $eventNode) {
+                $eventNode = $this->repo->createNode($eventNode);
+                $this->repo->createEdge($eventSeriesNode, $eventNode, 'RUNS_EVENT');
+
+                $startDate = date('M d y', $eventNode->get('start_date'));
+                $endDate = date('M d y', $eventNode->get('end_date'));
+                $displayInfo[] = '<comment>››</comment> New event <info>'.$startDate.'</info> to <info>'.$endDate.'</info>';
+            }
         }
 
         return $displayInfo;

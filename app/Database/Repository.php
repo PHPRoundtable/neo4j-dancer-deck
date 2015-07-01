@@ -83,6 +83,33 @@ class Repository
     }
 
     /**
+     * Creates a relationship (edge) between two nodes.
+     *
+     * @param BaseNode $nodeA
+     * @param BaseNode $nodeB
+     * @param string $relationshipName
+     * @param array $props
+     */
+    public function createEdge(BaseNode $nodeA, BaseNode $nodeB, $relationshipName, array $props = [])
+    {
+        $preparedData = [
+            'nodeIdA' => $nodeA->getId(),
+            'nodeIdB' => $nodeB->getId(),
+        ];
+        // @TODO add support for $props on the edge
+        // @TODO Research prepared data for relationship name
+        $this->lastQuery = "MATCH (a:".$nodeA::LABEL."),(b:".$nodeB::LABEL.")\n";
+        $this->lastQuery .= "WHERE a.id = {nodeIdA} AND b.id = {nodeIdB}";
+        $this->lastQuery .= "CREATE (a)-[r:".$relationshipName."]->(b)";
+        $this->lastQuery .= "RETURN r";
+        $this->client->sendCypherQuery($this->lastQuery, $preparedData);
+
+        // @TODO Validate the result somehow
+        //dd($this->client->getResult());
+        // @TODO Return a BaseEdge or something? :)
+    }
+
+    /**
      * Finds a node by prop(s)
      *
      * @param BaseNode $node

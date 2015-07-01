@@ -33,6 +33,16 @@ class BaseNode extends Collection
     }
 
     /**
+     * Gets the UUID for the node (every node has one).
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->get('id');
+    }
+
+    /**
      * Returns the props as named parameters
      *
      * @return string
