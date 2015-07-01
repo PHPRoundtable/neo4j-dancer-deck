@@ -97,9 +97,9 @@ class Seeder
 
             $displayInfo[] = 'Created event series <info>'.$eventSeriesNode->get('name').'</info>';
 
-            $eventNodes = $eventFactory->generateEvents($eventSeriesNode);
+            $this->eventNodes = $eventFactory->generateEvents($eventSeriesNode);
 
-            foreach ($eventNodes as $eventNode) {
+            foreach ($this->eventNodes as $eventNode) {
                 $eventNode = $this->repo->createNode($eventNode);
                 $this->repo->createEdge($eventSeriesNode, $eventNode, 'RUNS_EVENT');
 
