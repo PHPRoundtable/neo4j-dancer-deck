@@ -30,6 +30,11 @@ class Seeder
     private $eventNodes;
 
     /**
+     * @var array
+     */
+    private $subscriptionNodes;
+
+    /**
      * @param Repository $repo
      * @param UserFactory $userFactory
      */
@@ -48,8 +53,9 @@ class Seeder
     {
         $userDisplayInfo = $this->seedUserData();
         $eventSeriesDisplayInfo = $this->seedEventSeries();
+        $subscriptionsDisplayInfo = $this->seedSubscriptions();
 
-        return array_merge($userDisplayInfo, $eventSeriesDisplayInfo);
+        return array_merge($userDisplayInfo, $eventSeriesDisplayInfo, $subscriptionsDisplayInfo);
     }
 
     /**
@@ -107,6 +113,31 @@ class Seeder
                 $endDate = date('M d y', $eventNode->get('end_date'));
                 $displayInfo[] = '<comment>››</comment> New event <info>'.$startDate.'</info> to <info>'.$endDate.'</info>';
             }
+        }
+
+        return $displayInfo;
+    }
+
+    /**
+     * Seeds the database with subscription nodes
+     *
+     * @return array
+     */
+    private function seedSubscriptions()
+    {
+        $factory = new SubscriptionFactory;
+        $nodes = $factory->generateSubscriptions(5);
+
+        $displayInfo = [
+          '', // New line
+          '<comment>Seeding Subscription nodes...</comment>',
+        ];
+
+        foreach ($nodes as $subscriptionNode) {
+            $subscriptionNode = $this->repo->createNode($subscriptionNode);
+            $this->subscriptionNodes[] = $subscriptionNode;
+
+            $displayInfo[] = 'Created subscription <info>'.$subscriptionNode->get('name').'</info>';
         }
 
         return $displayInfo;
