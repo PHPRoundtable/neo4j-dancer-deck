@@ -87,10 +87,9 @@ class Repository
      *
      * @param BaseNode $nodeA
      * @param BaseNode $nodeB
-     * @param string $relationshipName
-     * @param array $props
+     * @param BaseEdge $edge
      */
-    public function createEdge(BaseNode $nodeA, BaseNode $nodeB, $relationshipName, array $props = [])
+    public function createEdge(BaseNode $nodeA, BaseNode $nodeB, BaseEdge $edge)
     {
         $preparedData = [
             'nodeIdA' => $nodeA->getId(),
@@ -100,7 +99,7 @@ class Repository
         // @TODO Research prepared data for relationship name
         $this->lastQuery = "MATCH (a:".$nodeA::LABEL."),(b:".$nodeB::LABEL.")\n";
         $this->lastQuery .= "WHERE a.id = {nodeIdA} AND b.id = {nodeIdB}";
-        $this->lastQuery .= "CREATE (a)-[r:".$relationshipName."]->(b)";
+        $this->lastQuery .= "CREATE (a)-[r:".$edge::NAME."]->(b)";
         $this->lastQuery .= "RETURN r";
         $this->client->sendCypherQuery($this->lastQuery, $preparedData);
 

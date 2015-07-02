@@ -2,6 +2,7 @@
 
 use DancerDeck\DanceEvents\Event;
 use DancerDeck\DanceEvents\EventSeries;
+use DancerDeck\DanceEvents\RunsEventEdge;
 use Faker\Factory as Faker;
 
 class EventFactory
@@ -43,5 +44,15 @@ class EventFactory
         }
 
         return $nodes;
+    }
+
+    /**
+     * Returns the RunsEventEdge
+     *
+     * @return RunsEventEdge
+     */
+    public function getRunsEventEdge()
+    {
+        return new RunsEventEdge;
     }
 }

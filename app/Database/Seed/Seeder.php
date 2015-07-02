@@ -5,6 +5,16 @@ use DancerDeck\Database\Repository;
 class Seeder
 {
     /**
+     * @const int
+     */
+    const NUMBER_OF_USERS = 10;
+
+    /**
+     * @const int
+     */
+    const NUMBER_OF_EVENT_SERIES = 10;
+
+    /**
      * @var Repository
      */
     private $repo;
@@ -59,13 +69,34 @@ class Seeder
     }
 
     /**
+     * Returns random values from an array
+     *
+     * @param array $items
+     * @param int $maxItems
+     *
+     * @return array
+     */
+    public static function arrayRandomElement(array $items, $maxItems)
+    {
+        $keys = array_rand($items, $maxItems);
+        $keys = is_array($keys) ? $keys : [$keys];
+        $returnItems = [];
+
+        foreach ($keys as $key) {
+            $returnItems[] = $items[$key];
+        }
+
+        return $returnItems;
+    }
+
+    /**
      * Seeds the database with user data
      *
      * @return array
      */
     private function seedUserData()
     {
-        $nodes = $this->userFactory->generateNodes(10);
+        $nodes = $this->userFactory->generateNodes(self::NUMBER_OF_USERS);
 
         $displayInfo = [
           '', // New line
@@ -91,7 +122,8 @@ class Seeder
     {
         $eventSeriesFactory = new EventSeriesFactory;
         $eventFactory = new EventFactory;
-        $nodes = $eventSeriesFactory->generateNodes(10);
+        $nodes = $eventSeriesFactory->generateNodes(self::NUMBER_OF_EVENT_SERIES);
+        $edge = $eventFactory->getRunsEventEdge();
 
         $displayInfo = [
           '', // New line
@@ -107,7 +139,8 @@ class Seeder
 
             foreach ($this->eventNodes as $eventNode) {
                 $eventNode = $this->repo->createNode($eventNode);
-                $this->repo->createEdge($eventSeriesNode, $eventNode, 'RUNS_EVENT');
+
+                $this->repo->createEdge($eventSeriesNode, $eventNode, $edge);
 
                 $startDate = date('M d y', $eventNode->get('start_date'));
                 $endDate = date('M d y', $eventNode->get('end_date'));
@@ -125,21 +158,57 @@ class Seeder
      */
     private function seedSubscriptions()
     {
-        $factory = new SubscriptionFactory;
-        $nodes = $factory->generateSubscriptions(5);
+        $randUsers = $this->getRandomUsers();
 
         $displayInfo = [
           '', // New line
-          '<comment>Seeding Subscription nodes...</comment>',
+          '<comment>Seeding subscription edges...</comment>',
         ];
 
-        foreach ($nodes as $subscriptionNode) {
-            $subscriptionNode = $this->repo->createNode($subscriptionNode);
-            $this->subscriptionNodes[] = $subscriptionNode;
+        $factory = new SubscriptionFactory;
 
-            $displayInfo[] = 'Created subscription <info>'.$subscriptionNode->get('name').'</info>';
+        foreach ($randUsers as $user) {
+            $randEventSeries = $this->getRandomEventSeries(4);
+            $displayInfo[] = 'Subscribing user <info>'.$user->get('name').'</info> to:';
+
+            foreach ($randEventSeries as $eventSeries) {
+                $edges = $factory->getRandomSubscriptionEdges();
+
+                $displayInfo[] = '<comment>››</comment> <info>'.$eventSeries->get('name').'</info>:';
+                foreach ($edges as $edge) {
+                    $this->repo->createEdge($user, $eventSeries, $edge);
+                    $displayInfo[] = '<comment>›››› '.$edge::NAME.'</comment>';
+                }
+            }
         }
 
         return $displayInfo;
+    }
+
+    /**
+     * Gets a handful of random User nodes
+     *
+     * @return array
+     */
+    private function getRandomUsers()
+    {
+        $numberOfNodes = mt_rand(3, self::NUMBER_OF_USERS);
+
+        return self::arrayRandomElement($this->userNodes, $numberOfNodes);
+    }
+
+    /**
+     * Gets a random EventSeries node
+     *
+     * @param int $max
+     *
+     * @return array
+     */
+    private function getRandomEventSeries($max = null)
+    {
+        $max = $max ?: self::NUMBER_OF_EVENT_SERIES;
+        $numberOfNodes = mt_rand(1, $max);
+
+        return self::arrayRandomElement($this->eventSeriesNodes, $numberOfNodes);
     }
 }

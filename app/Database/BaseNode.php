@@ -4,7 +4,7 @@ use Illuminate\Support\Collection;
 
 class BaseNode extends Collection
 {
-    use UuidGeneratorTrait;
+    use UuidGeneratorTrait, PropValidatorTrait;
 
     /**
      * @const string
@@ -87,21 +87,5 @@ class BaseNode extends Collection
     public function keys()
     {
         return array_keys($this->items);
-    }
-
-    /**
-     * Validate that the props are expected
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function validateProps()
-    {
-        $props = $this->keys();
-
-        foreach ($props as $prop) {
-            if (!in_array($prop, static::$props)) {
-                throw new \InvalidArgumentException('Unexpected prop "'.$prop.'".');
-            }
-        }
     }
 }
