@@ -2,6 +2,9 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::pattern('static_page', '^(about|contact|privacy)$');
+Route::get('/{static_page}', 'HomeController@staticPage');
+
 Route::get('facebook/login', 'Auth\FacebookController@authorize');
 Route::get('facebook/callback', 'Auth\FacebookController@callback');
 

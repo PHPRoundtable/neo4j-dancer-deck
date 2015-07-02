@@ -2,7 +2,7 @@
 
 use DancerDeck\Services\View\JavascriptManager;
 use Illuminate\Support\Collection;
-use Illuminate\View\View;
+use Illuminate\Contracts\View\Factory as View;
 
 class BaseFrontEndController extends Controller
 {
@@ -27,8 +27,9 @@ class BaseFrontEndController extends Controller
         $this->globalViewVars = new Collection();
 
         // Share with the world!
-        $this->view->with('js', $this->js);
-        $this->view->with('globalViewVars', $this->globalViewVars);
+        $this->view = view();
+        $this->view->share('js', $this->js);
+        $this->view->share('globalViewVars', $this->globalViewVars);
 
         $this->setDefaultGlobalVars();
         $this->setDefaultJavascript();
@@ -36,31 +37,32 @@ class BaseFrontEndController extends Controller
 
     protected function setTitle($title)
     {
-        //$this->globalViewVars->title = $title . ' :: ' . \Lang::get('default.meta.title');
-        $this->globalViewVars->title = $title . ' :: Dancer Deck';
+        $this->globalViewVars['title'] = $title.' :: '.trans('share.default.title');
     }
 
     protected function setOpenGraphTags($title, $description, $url = null)
     {
-        $this->view->with('meta', [
+        $this->view->share('meta', [
             'og:title' => $title,
             'og:description' => $description,
-            'og:url' => $url ?: \Request::url(),
-            'og:site_name' => \Lang::get('share.home.facebook.site_name'),
-            'og:image' => \Lang::get('share.home.facebook.image'),
+            'og:url' => $url ?: url('/'),
+            'og:site_name' => trans('share.home.facebook.site_name'),
+            'og:image' => trans('share.home.facebook.image'),
         ]);
     }
 
     protected function setDefaultGlobalVars()
     {
-        //$this->globalViewVars->title = \Lang::get('default.meta.title');
-        $this->globalViewVars->title = 'Dancer Deck';
-        //$this->globalViewVars->isMobile = \Agent::isMobile();
-        $this->globalViewVars->metaData = [];
-        $this->view->with('links', [
-            'home' => route('home'),
+        $this->globalViewVars['title'] = trans('share.default.title');
+        //$this->globalViewVars['isMobile'] = \Agent::isMobile();
+        $this->globalViewVars['metaData'] = [];
+        $this->view->share('links', [
+            'home' => url('/'),
             'about' => url('about'),
             'contact' => url('contact'),
+            'privacy' => url('privacy'),
+            'auth.logout' => url('auth/logout'),
+            'events.browse' => url('events/browse'),
         ]);
     }
 
