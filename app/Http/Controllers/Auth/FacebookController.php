@@ -1,11 +1,11 @@
 <?php namespace DancerDeck\Http\Controllers\Auth;
 
-use DancerDeck\Http\Controllers\Controller;
+use DancerDeck\Http\Controllers\BaseFrontEndController;
 use DancerDeck\Facebook\FacebookUserNodeImporter;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 use Facebook\Exceptions\FacebookSDKException;
 
-class FacebookController extends Controller
+class FacebookController extends BaseFrontEndController
 {
     /**
      * @var LaravelFacebookSdk
@@ -15,6 +15,8 @@ class FacebookController extends Controller
     public function __construct(LaravelFacebookSdk $fb)
     {
         $this->fb = $fb;
+
+        parent::__construct();
     }
 
     public function authorize()

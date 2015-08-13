@@ -1,11 +1,11 @@
 <?php namespace DancerDeck\Http\Controllers\Auth;
 
-use DancerDeck\Http\Controllers\Controller;
+use DancerDeck\Http\Controllers\BaseFrontEndController;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Validator;
 use User;
 
-class AuthController extends Controller
+class AuthController extends BaseFrontEndController
 {
     use AuthenticatesAndRegistersUsers;
 
@@ -17,6 +17,8 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+
+        parent::__construct();
     }
 
     /**
