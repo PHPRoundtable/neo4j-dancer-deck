@@ -3786,11 +3786,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border: 1px solid transparent;
 }
 @media (min-width: 768px) {
-  .navbar {
-    border-radius: 4px;
-  }
-}
-@media (min-width: 768px) {
   .navbar-header {
     float: left;
   }
@@ -6233,7 +6228,19 @@ label,
 }
 footer {
   border-top: 1px solid #e7e7e7;
-  background-color: #f8f8f8;
   padding: 30px 0;
   text-align: center;
+}
+footer .breadcrumb {
+  background: transparent;
+}
+.dd-hero {
+  background: #eeeeee;
+  margin-top: -20px;
+  padding: 30px 0;
+}
+.dd-event-listing {
+  border-bottom: 1px solid #e7e7e7;
+  padding-bottom: 20px;
+  padding-top: 20px;
 }

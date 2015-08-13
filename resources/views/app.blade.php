@@ -23,6 +23,7 @@
     <meta property="og:type" content="website" />
 
     <link href="{{ elixir("css/app.css") }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -30,7 +31,7 @@
     <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -40,6 +41,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{ $links['home'] }}">Dancer Deck</a>
+            <div class="dd-micro-about">All your WCS dance events in once place</div>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
