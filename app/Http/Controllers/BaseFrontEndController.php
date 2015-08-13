@@ -61,6 +61,8 @@ class BaseFrontEndController extends Controller
             'about' => url('about'),
             'contact' => url('contact'),
             'privacy' => url('privacy'),
+            'auth.register' => url('auth/register'),
+            'auth.login' => url('auth/login'),
             'auth.logout' => url('auth/logout'),
             'events.browse' => url('events/browse'),
         ]);

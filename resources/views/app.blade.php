@@ -59,6 +59,9 @@
                             <li><a href="{{ $links['auth.logout'] }}">Logout</a></li>
                         </ul>
                     </li>
+                @else
+                    <li><a href="{{ $links['auth.login'] }}">Login</a></li>
+                    <li><a href="{{ $links['auth.register'] }}">Register</a></li>
                 @endif
                 <li><a href="{{ $links['events.browse'] }}">Browse all events</a></li>
             </ul>
