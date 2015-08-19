@@ -4,6 +4,7 @@ Route::get('/', 'HomeController@index');
 
 // Events
 Route::get('events/browse', 'EventController@browse');
+Route::get('events/show', 'EventController@show');
 
 // Static Pages
 Route::pattern('static_page', '^(about|contact|privacy)$');

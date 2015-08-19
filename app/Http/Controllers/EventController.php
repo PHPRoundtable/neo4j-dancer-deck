@@ -19,4 +19,12 @@ class EventController extends BaseFrontEndController
     {
         return view('event-browse');
     }
+
+    /**
+     * @return View
+     */
+    public function show()
+    {
+        return view('event-show');
+    }
 }
