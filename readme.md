@@ -11,9 +11,9 @@ SSH into VM and `cd` into Dancer Deck working dir:
 
 To delete all the database entries:
 
-    $ art neo4j:clear
+    $ php artisan neo4j:clear
 
 To seed the database:
 
-    $ art neo4j:seed
+    $ php artisan neo4j:seed
 
